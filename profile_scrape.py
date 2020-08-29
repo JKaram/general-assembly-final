@@ -33,5 +33,5 @@ def scroll(driver, timeout):
 
 
 scroll(browser, .8)
+print(links[0])
 posts = [l.attrs["href"] for l in links if "/p/" in l.attrs["href"]]
-print(len(posts))
