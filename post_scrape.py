@@ -1,13 +1,23 @@
+def find_description(soup):
+    try:
+        description = soup.find('div', { "class" : "C4VMK"})[0].find('span').text
+        return description
+    except:
+        pass
+    try:
+        description = soup.find('div', { "class" : "C4VMK"}).find('span')
+        return description
+    except:
+        return "Error"
+
 def scrape_post(soup, profile, url):
     try:
         likes = soup.find('div', {'class' : 'Nm9Fw'}).find('span').text
     except:
-        likes = 'VIDEO'
+        likes = 'Video'
 
-    try:
-        description = soup.find('div', { "class" : "C4VMK"})[0].find('span').text
-    except:
-        description = "Error"
+    description = find_description(soup)
+
     try:
         img_src = soup.find('img')[0].attrs['src']
     except:
@@ -17,15 +27,19 @@ def scrape_post(soup, profile, url):
         date = soup.find('time')[0].attrs['datetime']
     except:
         date = "Error"
-    # comments = len(soup.find('ul', {'class' : 'XQXOT'}).find('span')) - 1
+    
+    try:
+        comments = len(soup.find('ul', {'class' : 'XQXOT'}).find('span')) - 1
+    except:
+        comments = "Error"
+
     return {
         **profile,
         'likes' : likes,
-        'date' : date,
-        # 'comments' : comments,
-        "img_src" : img_src,
+        'comments' : comments,
         "description" : description,
+        'date' : date,
+        "img_src" : img_src,
         "post_url" : url
-
     }
  
