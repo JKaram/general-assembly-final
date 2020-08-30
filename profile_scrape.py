@@ -1,6 +1,8 @@
 import pandas as pd
 import time
 from selenium import webdriver
+from selenium.webdriver import ActionChains
+
 from gazpacho import Soup
 
 def remove_duplicates(source_list):
@@ -9,29 +11,20 @@ def remove_duplicates(source_list):
     return result
 
 def scroll_down(driver, timeout):
-    links = []
-    links.extend(driver.find_elements_by_xpath("//a[@href]"))
     scroll_pause_time = timeout
+    output = []
+
     last_height = driver.execute_script("return document.body.scrollHeight")
     
+
     while True:
+        output.extend(elem.get_attribute("href") for elem in driver.find_elements_by_xpath("//a[@href]") if "/p/" in elem.get_attribute("href"))
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        links.extend(driver.find_elements_by_xpath("//a[@href]"))
         time.sleep(scroll_pause_time)
 
 
         new_height = driver.execute_script("return document.body.scrollHeight")
-        if new_height == last_height:
-            # posts = [l.attrs["href"] for l in links if "/p/" in l.attrs["href"]]
-            
-            # return remove_duplicates(posts)
-            output = []
-            for elem in links:
-                try:
-                    output.append(elem.get_attribute("href"))
-                except:
-                    pass
-            output = [l for l in output if "/p/" in l]
+        if new_height == last_height:            
             return remove_duplicates(output)
         last_height = new_height
      

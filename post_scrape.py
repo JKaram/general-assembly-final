@@ -8,9 +8,15 @@ def scrape_post(soup, profile, url):
         description = soup.find('div', { "class" : "C4VMK"})[0].find('span').text
     except:
         description = "Error"
-
-    img_src = soup.find('img')[0].attrs['src']
-    date = soup.find('time')[0].attrs['datetime']
+    try:
+        img_src = soup.find('img')[0].attrs['src']
+    except:
+        img_src = "Error"
+    
+    try:
+        date = soup.find('time')[0].attrs['datetime']
+    except:
+        date = "Error"
     # comments = len(soup.find('ul', {'class' : 'XQXOT'}).find('span')) - 1
     return {
         **profile,

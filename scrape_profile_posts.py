@@ -5,21 +5,24 @@ from gazpacho import Soup
 
 from post_scrape import scrape_post
 from profile_scrape import scroll_down, remove_duplicates
+from smash_button import smash_button
 
-url = "https://www.instagram.com/clintstevenstv/"
-browser = webdriver.Chrome('/mnt/l/projects/instagram-data/chromedriver.exe') 
+url = "https://www.instagram.com/iscotchdotca/"
+browser = webdriver.Firefox(executable_path='/mnt/l/projects/instagram-data/geckodriver.exe') #'/mnt/l/projects/instagram-data/chromedriver.exe'
 browser.get(url)
 html = browser.page_source
 soup = Soup(html)
-
 
 name = soup.find('h2').text
 num_of_posts = soup.find('span', {'class' : "g47SY"})[0].text
 followers =  soup.find('span', {'class' : "g47SY"})[1].text
 following = soup.find('span', {'class' : "g47SY"})[2].text
+time.sleep(3)
+
+smash_button(browser, 2)
 
 
-posts = scroll_down(browser, 4)
+posts = scroll_down(browser, 3)
 
 
 profile = {
