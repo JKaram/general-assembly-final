@@ -9,7 +9,7 @@ from smash_button import smash_button
 from tqdm import tqdm
 
 
-persons = ["https://www.instagram.com/tpearce2/","https://www.instagram.com/yourdoseofdaisy/", "https://www.instagram.com/gusthegoldenboy/","https://www.instagram.com/tokenceo/"," https://www.instagram.com/carlingtoncoffeehouse/"]
+persons = ["https://www.instagram.com/itsborocoprunning/", "https://www.instagram.com/nikegolf/", "https://www.instagram.com/sptguy33/", "https://www.instagram.com/ctvottawa/", "https://www.instagram.com/imagesofcanada/"]
 
 
 
@@ -21,7 +21,10 @@ for person in tqdm(persons):
     html = browser.page_source
     soup = Soup(html)
 
-    name = soup.find('h2').text
+    try:
+        name = soup.find('h1').text
+    except:
+        name = soup.find('h2').text 
     num_of_posts = soup.find('span', {'class' : "g47SY"})[0].text
     followers =  soup.find('span', {'class' : "g47SY"})[1].text
     following = soup.find('span', {'class' : "g47SY"})[2].text
