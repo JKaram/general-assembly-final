@@ -11,6 +11,7 @@ def remove_duplicates(source_list):
     return result
 
 def scroll_down(driver, timeout):
+    print("begining scroll")
     scroll_pause_time = timeout
     
     output = []
@@ -28,7 +29,7 @@ def scroll_down(driver, timeout):
         new_height = driver.execute_script("return document.body.scrollHeight")
 
         if new_height == last_height:            
-                   print(len(output))
+                   print("Done scroll")
                    return remove_duplicates(output)
        
         last_height = new_height
