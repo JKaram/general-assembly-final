@@ -9,7 +9,7 @@ from smash_button import smash_button
 from tqdm import tqdm
 
 
-url = "https://www.instagram.com/codyshreed/"
+url = "https://www.instagram.com/katyperry/"
 browser = webdriver.Firefox(executable_path='/mnt/l/projects/instagram-data/geckodriver.exe') #'/mnt/l/projects/instagram-data/chromedriver.exe'
 browser.get(url)
 html = browser.page_source
@@ -24,7 +24,7 @@ time.sleep(3)
 smash_button(browser, 2)
 
 
-posts = scroll_down(browser, .3)
+posts = scroll_down(browser, 2)
 
 
 profile = {
@@ -43,11 +43,11 @@ for post in tqdm(posts):
     html = browser.page_source
     soup = Soup(html)
     data.append(scrape_post(soup, profile, url))
-    time.sleep(.3)
+    time.sleep(1.5)
 
 
 df = pd.DataFrame(data)
 
 
-df.to_csv(f'/profile_csvs/{name}.csv')
+df.to_csv(f'./profile_csvs/{name}.csv')
             

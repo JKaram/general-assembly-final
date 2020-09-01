@@ -14,24 +14,25 @@ def scrape_post(soup, profile, url):
     try:
         likes = soup.find('div', {'class' : 'Nm9Fw'}).find('span').text
     except:
-        likes = 'Video'
+        likes = None
 
     description = find_description(soup)
 
     try:
         img_src = soup.find('img')[0].attrs['src']
     except:
-        img_src = "Error"
+        img_src = None
     
     try:
         date = soup.find('time')[0].attrs['datetime']
     except:
-        date = "Error"
+        date = None
     
     try:
         comments = len(soup.find('ul', {'class' : 'XQXOT'}).find('span')) - 1
     except:
-        comments = "Error"
+        comments = None
+
 
     return {
         **profile,
