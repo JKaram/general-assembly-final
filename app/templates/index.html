@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wealth-o-matic</title>
+  </head>
+  <body>
+    <h3>Wealth-o-matic</h3>
+    <form action="/predict" method="POST">
+      <label for="start">Start date:</label>
+
+      <input
+        type="date"
+        id="start"
+        name="date"
+        value="2018-07-22"
+        min="2018-01-01"
+        max="2018-12-31"
+      />
+
+      <p><input type="submit" value="submit" /></p>
+    </form>
+  </body>
+</html>
